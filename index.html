@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Food Hub | Premium Cravings</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="momos.jpg">
+    <meta name="description"
+        content="Street Food Hub - Best Momos and Rolls in Delta Bazzar, Odisha. Fresh, delicious, and premium street food.">
+    <meta name="keywords" content="Street Food, Odisha, Momos, Rolls, Chowmein, Delta Bazzar">
+    <meta name="theme-color" content="#ff4d05">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Street<span>Food</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#events">Bulk Orders</a>
+            <a href="#contact">Contact</a>
+            <button id="theme-toggle" onclick="toggleTheme()"
+                style="background:none; border:none; cursor:pointer; font-size:1.2rem; margin-left:20px;">
+                🌙
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <h1>Savor the Authentic <br><span>Street Flavors</span></h1>
+            <p>Experience the best Momos, Rolls, and Paneer sticks in Urali.</p>
+            <a href="#menu" class="cta-btn">Explore Menu</a>
+        </div>
+    </header>
+
+    <section class="menu-section" id="menu">
+        <div id="weather-suggestion" class="weather-box">
+            <div class="weather-info">
+                <span id="temp-display">--°C</span>
+                <span id="condition-display">Fetching weather...</span>
+            </div>
+            <div class="suggestion-content">
+                <h3 id="food-recommendation">Checking what's best for the weather...</h3>
+                <p id="weather-reason">Give us a second to look outside!</p>
+            </div>
+        </div>
+
+        <button class="view-all-btn" onclick="openFullMenu()">See All Menu 📋</button>
+
+        <div class="cart-floating-btn" onclick="toggleCart()">
+            <span class="cart-icon">🛒</span>
+            <span id="cart-count">0</span>
+        </div>
+
+        <div id="menu-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeFullMenu()">&times;</span>
+                <h2>Full Digital Menu</h2>
+                <div id="full-menu-grid" class="menu-container">
+                </div>
+            </div>
+        </div>
+
+        <div id="cart-sidebar" class="cart-sidebar">
+            <div class="cart-header">
+                <h3>Your Order</h3>
+                <span onclick="toggleCart()" style="cursor:pointer">✖</span>
+            </div>
+            <div id="cart-items-list">
+            </div>
+            <div class="cart-footer">
+                <div class="total-amount">Total: <span id="cart-total">₹0</span></div>
+                <button class="checkout-btn" onclick="processPayment()">Confirm Order & Pay</button>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Our Signature Menu</h2>
+            <div class="underline"></div>
+            <div class="search-wrapper">
+                <input type="text" id="menuSearch" placeholder="Search for momos, rolls, etc..." onkeyup="filterMenu()">
+            </div>
+            <div class="filter-container">
+                <button class="filter-btn active" onclick="filterCategory('all')">All Items</button>
+                <button class="filter-btn" onclick="filterCategory('momos')">Momos</button>
+                <button class="filter-btn" onclick="filterCategory('rolls')">Rolls</button>
+                <button class="filter-btn" onclick="filterCategory('chinese')">Chinese</button>
+            </div>
+        </div>
+
+        <div class="menu-container">
+            <div class="menu-card">
+                <div class="img-container">
+                    <img src="images/momos.jpg" alt="Momos">
+                </div>
+                <div class="card-info">
+                    <h3>Steamed Momos</h3>
+                    <p class="price">₹60 <span>/ plate</span></p>
+                    <button class="order-btn" onclick="addToCart('Steamed Momos', 60)">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="img-container">
+                    <img src="images/roll.jpg" alt="Veg Roll">
+                </div>
+                <div class="card-info">
+                    <h3>Classic Veg Roll</h3>
+                    <p class="price">₹40</p>
+                    <button class="order-btn" onclick="addToCart('Classic Veg Roll', 40)">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="img-container">
+                    <img src="images/paneer.jpg" alt="Paneer Stick">
+                </div>
+                <div class="card-info">
+                    <h3>Paneer Stick</h3>
+                    <p class="price">₹40 <span>/ plate</span></p>
+                    <button class="order-btn" onclick="addToCart('Paneer Stick', 40)">Add to cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="img-container">
+                    <img src="images/chowmein.jpg" alt="Chowmein">
+                </div>
+                <div class="card-info">
+                    <h3>Special Chowmein</h3>
+                    <p class="price">₹40</p>
+                    <button class="order-btn" onclick="addToCart('Special Chowmein', 40)">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-banner" id="events">
+        <div class="events-overlay">
+            <h2>Planning a Special Event?</h2>
+            <p>Birthdays • Weddings • Receptions</p>
+            <button class="event-btn" onclick="eventOrder()">Get a Quote</button>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <section class="reviews-section">
+            <div class="section-title">
+                <h2>What Our Foodies Say</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="review-container">
+                <div class="review-card active">
+                    <p>"The best Momos in Odisha! The spicy chutney is a game changer."</p>
+                    <h4>- Rahul S.</h4>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-card">
+                    <p>"Value for money. The Veg Roll is huge and very fresh."</p>
+                    <h4>- Priya M.</h4>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-card">
+                    <p>"Perfect place for a quick evening snack with friends."</p>
+                    <h4>- Amit K.</h4>
+                    <div class="stars">⭐⭐⭐⭐</div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="section-title">
+                <h2>Find Us Here</h2>
+                <div class="underline"></div>
+                <p>📍 Truptee Veg Fast Food, Bhingarpur, Odisha</p>
+            </div>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.175116744031!2d85.9224855750058!3d20.210037181244092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a199f4fbebaeb23%3A0x14078473f1f7c578!2sTRUPTEE%20VEG%20FAST%20FOOD!5e0!3m2!1sen!2sin!4v1709848500000!5m2!1sen!2sin"
+                    width="100%" height="400" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+        <section class="contact-section" id="contact">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <div class="underline"></div>
+                <p>Planning a party or bulk order? Let's make it delicious!</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <h3>Contact Details</h3>
+                    <div class="info-item">
+                        <span class="info-icon">📍</span>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Bhingarpur, Odisha 752115</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📞</span>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 78489 61900</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">⏰</span>
+                        <div>
+                            <h4>Open Hours</h4>
+                            <p>Daily: 4:00 PM - 10:30 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <form id="contactForm" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" name="name" id="userName" placeholder="Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" id="userEmail" placeholder="Email Address" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" id="userMessage" rows="5" placeholder="Tell us about your order..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message <span>🚀</span></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <footer class="pro-footer">
+        <div class="footer-container">
+            <div class="footer-section brand-box">
+                <h2 class="footer-logo">Truptee<span>Veg</span></h2>
+                <p>Serving the tastiest street food in Bhingarpur since 2024. Quality you can taste, service you can
+                    trust.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section links-box">
+                <h4>Quick Explore</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Our Menu</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#contact">Location</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact-box">
+                <h4>Get In Touch</h4>
+                <div class="contact-item">
+                    <span class="icon">📞</span>
+                    <p>+91 7848961900</p>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">📍</span>
+                    <p>Bhingarpur, Odisha 752115</p>
+                </div>
+                <a href="https://wa.me/916370959598" class="wa-footer-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="20" alt=""> Order via
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            <p>&copy; 2024 <strong>Truptee Veg Fast Food</strong>. All Rights Reserved.</p>
+            <p class="dev-tag">Designed with ❤️ by <span class="engineer-name">Saroj</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
